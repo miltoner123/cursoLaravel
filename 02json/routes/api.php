@@ -13,4 +13,4 @@ Route::get('usuarios/{id}', [App\Http\Controllers\UsuarioController::class,'show
 Route::put('usuarios/{id}', [App\Http\Controllers\UsuarioController::class,'update']);
 Route::delete('usuarios/{id}', [App\Http\Controllers\UsuarioController::class,'destroy']);
 
-
+Route::apiResource('usuarios',App\Http\Controllers\UsuarioController::class);

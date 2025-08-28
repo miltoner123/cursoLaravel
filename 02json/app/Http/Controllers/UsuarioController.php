@@ -19,17 +19,22 @@ class UsuarioController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
+        try{
+            $request->validate([
+                'name'=>'required|string|max:10|min:5',
+            ]);
+
          $nuevousuario=[
             'id'=>count($this->usuarios)+1,
             'name'=> $request->input('name')
          ];
          $this->usuarios[]=$nuevousuario;
          return response()->json($nuevousuario,201);
-
+    }catch(\Illuminate\Validation\ValidationException $e){
+        return response()->json(['message'=>'Validation failed','errors'=>$e->errors(),422]);
     }
-
+    }
     /**
      * Display the specified resource.
      */
